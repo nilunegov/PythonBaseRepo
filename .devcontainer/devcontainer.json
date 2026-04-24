@@ -1,0 +1,81 @@
+{
+  "name": "Name",
+  // Docker
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "dev",
+  "workspaceFolder": "/workspace",
+  "remoteUser": "vscode",
+  "containerUser": "vscode",
+  "shutdownAction": "stopCompose",
+  "overrideCommand": false,
+  "postCreateCommand": "bash .devcontainer/init.sh",
+  "forwardPorts": [
+    5000
+  ],
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        /* ========= PYTHON ========= */
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "tamasfe.even-better-toml",
+        /* ========= DATABASE ========= */
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-sqlite",
+        /* ========= DBML ========= */
+        "dbdiagram.dbdiagram-vscode",
+        "aflalo.dbml-formatter",
+        "matt-meyers.vscode-dbml",
+        /* ========= MARKDOWN ========= */
+        "yzhang.markdown-all-in-one",
+        "shd101wyy.markdown-preview-enhanced",
+        /* ========= UI ========= */
+        "vscode-icons-team.vscode-icons",
+        /* ========= GIT ========= */
+        "mhutchie.git-graph",
+        /* ========= JSON ========= */
+        "vscode.json-language-features"
+      ],
+      "settings": {
+        /* ================= TERMINAL ================= */
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.cursorBlinking": true,
+        "terminal.integrated.cursorStyle": "line",
+        "terminal.integrated.cursorWidth": 1,
+        /* ================= PYTHON ================= */
+        "python.analysis.typeCheckingMode": "basic",
+        "python.defaultInterpreterPath": "/workspace/.venv/bin/python",
+        /* ================= EDITOR ================= */
+        "editor.bracketPairColorization.enabled": true,
+        "editor.guides.bracketPairs": true,
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.ruff": "explicit",
+          "source.organizeImports.ruff": "explicit"
+        },
+        /* ================= FORMATTERS ================= */
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff"
+        },
+        "[jsonc]": {
+          "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        "[dbml]": {
+          "editor.defaultFormatter": "aflalo.dbml-formatter"
+        },
+        "ruff.enable": true,
+        "ruff.organizeImports": true,
+        "ruff.fixAll": true,
+        /* ================= UI ================= */
+        "workbench.iconTheme": "vscode-icons",
+        "sqltools.useNodeRuntime": true
+      }
+    }
+  }
+}

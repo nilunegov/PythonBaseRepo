@@ -1,0 +1,16 @@
+services:
+  dev:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/workspace:cached
+      - python-venv:/workspace/.venv
+    command: sleep infinity
+    environment:
+      - PYTHONPATH=/trading_bot 
+    dns:
+      - 8.8.8.8
+
+volumes:
+  python-venv:
