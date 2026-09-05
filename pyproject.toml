@@ -1,39 +1,28 @@
 [project]
-name = "project"
-version = "0.1.0"
-description = "A simple project"
-readme = "README.md"
-requires-python = ">=3.12"
+name = "PythonBase"
+requires-python = ">=3.13"
+dynamic = ["version"]
 
-dependencies = [
-    "requests>=2.31.0",
-    "python-dotenv>=1.0.0",
-]
+dependencies = ["requests>=2.31.0", "python-dotenv>=1.0.0"]
 
-[project.optional-dependencies]
-dev = [
-    "pytest>=8.0.0",
-    "ruff>=0.6.0",
-    "mypy>=1.8.0",
-]
+[project.scripts]
+run-bot = "project.main:main"
 
-# [project.scripts]
-# main = "project1.main:main"
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
 
-# [build-system]
-# requires = ["setuptools>=68"]
-# build-backend = "setuptools.build_meta"
+[tool.hatch.version]
+source = "vcs"
 
-# =========================
-# Type checking
-# =========================
+[tool.hatch.build.targets.wheel]
+packages = ["src/project"]
+
+[dependency-groups]
+dev = ["ruff>=0.6.0", "ty>=0.0.70"]
+
 [tool.ruff]
-target-version = "py312"
+target-version = "py313"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B"]
-
-[tool.mypy]
-python_version = "3.12"
-strict = true
-ignore_missing_imports = true
