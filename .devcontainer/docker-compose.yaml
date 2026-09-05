@@ -1,0 +1,15 @@
+services:
+  dev:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ../..:/workspaces
+      - python-data:/opt/python
+    command: sleep infinity
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+volumes:
+  python-data:

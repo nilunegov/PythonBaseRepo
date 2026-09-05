@@ -1,10 +1,17 @@
 # syntax=docker/dockerfile:1
 
-FROM mcr.microsoft.com/devcontainers/python:3.12
+FROM mcr.microsoft.com/devcontainers/python:3.13-bookworm
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
+
+USER root
 
 ENV LANG=ru_RU.UTF-8 \
     LC_ALL=ru_RU.UTF-8 \
-    DEBIAN_FRONTEND=noninteractive
+    DEBIAN_FRONTEND=noninteractive \
+    UV_PROJECT_ENVIRONMENT=/opt/python/venv \
+    UV_CACHE_DIR=/opt/python/uv-cache \
+    PATH="/opt/python/venv/bin:$PATH"
 
 RUN rm -f /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
@@ -19,6 +26,7 @@ RUN rm -f /etc/apt/sources.list.d/yarn.list \
     && echo "Europe/Moscow" > /etc/timezone \
     && update-ca-certificates \
     && apt-get clean && rm -rf /var/lib/apt/lists/* \
-    && curl -Ls https://astral.sh/uv/install.sh | env UV_INSTALL_DIR=/usr/local/bin sh
+    && mkdir -p /opt/python/venv /opt/python/uv-cache \
+    && chown -R vscode:vscode /opt/python
 
 USER vscode
